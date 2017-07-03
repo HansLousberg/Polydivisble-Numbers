@@ -66,16 +66,10 @@ namespace polydivisibleWithDatabase
         {
             
             SetStartnumbers();
-            ClearTestingList();
             EndResultNumbers = new List<Polynumber>();
             do
             {
-                while(testnumbers.Count>0)
-                {
-                    TestChildNumbers();
-                }
-                if(DBComm.NumberInTesting()>0)//this function will look how many numbers are in the database
-                    testnumbers.Add(DBComm.GetOldestPolynumber());//this will fetch a number from the database
+                TestChildNumbers();
             }
             while (testnumbers.Count > 0);//end of do while
             return EndResultNumbers;
@@ -109,14 +103,9 @@ namespace polydivisibleWithDatabase
                         {
                             EndResultNumbers.Add(num1);
                         }
-                        else if (testnumbers.Count < maxListSize)
-                        {
-                            testnumbers.Add(num1);
-                        }
                         else
                         {
-                            DBComm.AddPolynumber(num1);
-                            DBpushes++;
+                            testnumbers.Add(num1);
                         }
                     }
                 }
@@ -147,10 +136,6 @@ namespace polydivisibleWithDatabase
             testnumbers.RemoveAt(testnumbers.Count - 1);
         }
         */
-        private void ClearTestingList()
-        {
-            DBComm.ClearTesting();
-        }
         
     }
 }
